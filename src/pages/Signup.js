@@ -38,15 +38,15 @@ const Signup = () => {
     });
 
     if (result.success) {
-      navigate('/login', { replace: true, state: { message: 'Account created successfully! Please login.' } });
+      navigate('/login', { replace: true, state: { message: 'Аккаунт успешно создан! Пожалуйста, войдите.' } });
     }
   };
 
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h1 className="auth-title">Sign Up</h1>
-        <p className="auth-subtitle">Create a new account</p>
+        <h1 className="auth-title">Зарегистрироваться</h1>
+        <p className="auth-subtitle">Создать новый аккаунт</p>
 
         {error && (
           <div className="error-message" role="alert">
@@ -57,14 +57,14 @@ const Signup = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="auth-form">
           <div className="form-group">
             <label htmlFor="username" className="form-label">
-              Username <span className="required">*</span>
+              Логин <span className="required">*</span>
             </label>
             <input
               id="username"
               type="text"
               {...register('username')}
               className={`form-input ${errors.username ? 'form-input-error' : ''}`}
-              placeholder="Enter your username"
+              placeholder="Введите ваш логин"
               disabled={isLoading}
             />
             {errors.username && (
@@ -81,7 +81,7 @@ const Signup = () => {
               type="email"
               {...register('email')}
               className={`form-input ${errors.email ? 'form-input-error' : ''}`}
-              placeholder="Enter your email"
+              placeholder="Введите ваш email"
               disabled={isLoading}
             />
             {errors.email && (
@@ -91,34 +91,34 @@ const Signup = () => {
 
           <div className="form-group">
             <label htmlFor="password" className="form-label">
-              Password <span className="required">*</span>
+              Пароль <span className="required">*</span>
             </label>
             <input
               id="password"
               type="password"
               {...register('password')}
               className={`form-input ${errors.password ? 'form-input-error' : ''}`}
-              placeholder="Enter your password"
+              placeholder="Введите ваш пароль"
               disabled={isLoading}
             />
             {errors.password && (
               <span className="error-text">{errors.password.message}</span>
             )}
             <small className="form-hint">
-              Must contain uppercase, lowercase, and number
+              Должно быть не менее 6 символов, включая заглавные буквы, цифры и специальные символы.
             </small>
           </div>
 
           <div className="form-group">
             <label htmlFor="confirmPassword" className="form-label">
-              Confirm Password <span className="required">*</span>
+              Подтвердить пароль <span className="required">*</span>
             </label>
             <input
               id="confirmPassword"
               type="password"
               {...register('confirmPassword')}
               className={`form-input ${errors.confirmPassword ? 'form-input-error' : ''}`}
-              placeholder="Confirm your password"
+              placeholder="Подтвердите ваш пароль"
               disabled={isLoading}
             />
             {errors.confirmPassword && (
@@ -128,7 +128,7 @@ const Signup = () => {
 
           <div className="form-group">
             <label htmlFor="role" className="form-label">
-              Role
+              Роль пользователя
             </label>
             <select
               id="role"
@@ -136,8 +136,8 @@ const Signup = () => {
               className="form-input"
               disabled={isLoading}
             >
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
+              <option value="user">Пользователь</option>
+              <option value="admin">Редактор</option>
             </select>
             {errors.role && (
               <span className="error-text">{errors.role.message}</span>
@@ -149,15 +149,15 @@ const Signup = () => {
             className="auth-button"
             disabled={isLoading}
           >
-            {isLoading ? 'Creating account...' : 'Sign Up'}
+            {isLoading ? 'Создание аккаунта...' : 'Зарегистрироваться'}
           </button>
         </form>
 
         <div className="auth-footer">
           <p>
-            Already have an account?{' '}
+            Есть аккаунт{' '}
             <Link to="/login" className="auth-link">
-              Login
+              Войти
             </Link>
           </p>
         </div>

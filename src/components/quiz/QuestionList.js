@@ -5,7 +5,7 @@ const QuestionList = ({ questions, onEdit, onDelete, isAuthor }) => {
   if (!questions || questions.length === 0) {
     return (
       <div className="question-list-empty">
-        <p>No questions yet. Add your first question to get started!</p>
+        <p>Пока нет вопросов. Добавьте первый вопрос, чтобы начать!</p>
       </div>
     );
   }

@@ -7,20 +7,20 @@ const Dashboard = () => {
 
   return (
     <div className="quiz-container">
-      <h1>Welcome{user ? `, ${user.username}` : ''}!</h1>
+      <h1>Приветствую{user ? `, ${user.username}` : ''}!</h1>
       <div className="dashboard-content">
         <div className="dashboard-card">
-          <h2>Get Started</h2>
-          <p>Create and manage your quizzes</p>
+          <h2>Начать</h2>
+          <p>Начните создавать тесты</p>
           <Link to="/quizzes" className="btn btn-primary">
-            View All Quizzes
+            Мои тесты
           </Link>
         </div>
         <div className="dashboard-card">
-          <h2>Create New Quiz</h2>
-          <p>Start building your quiz now</p>
+          <h2>Создать новый тест</h2>
+          <p>Начните создавать ваш тест</p>
           <Link to="/quizzes/new" className="btn btn-primary">
-            Create Quiz
+            Создать тест
           </Link>
         </div>
       </div>

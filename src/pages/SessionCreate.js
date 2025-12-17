@@ -59,7 +59,7 @@ const SessionCreate = () => {
       const data = await listQuizzes({ limit: 100 });
       setQuizzes(data);
     } catch (err) {
-      console.error('Failed to load quizzes:', err);
+      console.error('Ошибка:', err);
     }
   };
 
@@ -68,7 +68,7 @@ const SessionCreate = () => {
       const quiz = await getQuiz(quizId);
       setSelectedQuiz(quiz);
     } catch (err) {
-      console.error('Failed to load quiz:', err);
+      console.error('Ошибка:', err);
     }
   };
 
@@ -82,7 +82,7 @@ const SessionCreate = () => {
 
   const onSubmit = async (data) => {
     if (!user) {
-      setError('You must be logged in to create a session');
+      setError('Вы должны быть авторизованы для создания сессии');
       return;
     }
 
@@ -102,7 +102,7 @@ const SessionCreate = () => {
         ? (Array.isArray(err.response.data.detail) 
             ? err.response.data.detail.map(e => e.msg).join(', ')
             : err.response.data.detail)
-        : err.message || 'Failed to create session';
+        : err.message || 'Ошибка при создании сессии';
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -112,8 +112,8 @@ const SessionCreate = () => {
   return (
     <div className="quiz-container">
       <div className="quiz-form-container">
-        <h1>Create Quiz Session</h1>
-        <p className="form-subtitle">Start a new quiz session for participants to join</p>
+        <h1>Создать сессию викторины</h1>
+        <p className="form-subtitle">Стартовать</p>
 
         {error && (
           <div className="error-message" role="alert">
@@ -124,7 +124,7 @@ const SessionCreate = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="quiz-form">
           <div className="form-group">
             <label htmlFor="quiz_id" className="form-label">
-              Quiz <span className="required">*</span>
+              Викторина <span className="required">*</span>
             </label>
             <select
               id="quiz_id"
@@ -132,10 +132,10 @@ const SessionCreate = () => {
               className={`form-input ${errors.quiz_id ? 'form-input-error' : ''}`}
               disabled={loading || !!quizIdFromUrl}
             >
-              <option value="">Select a quiz</option>
+              <option value="">Выберите викторину</option>
               {quizzes.map((quiz) => (
                 <option key={quiz.id} value={quiz.id}>
-                  {quiz.title} {quiz.is_public ? '(Public)' : '(Private)'}
+                  {quiz.title} {quiz.is_public ? '(Публичная)' : '(Приватная)'}
                 </option>
               ))}
             </select>
@@ -144,7 +144,7 @@ const SessionCreate = () => {
             )}
             {selectedQuiz && (
               <div className="form-hint">
-                Selected: {selectedQuiz.title}
+                Выбранная викторина: {selectedQuiz.title}
                 {selectedQuiz.description && ` - ${selectedQuiz.description}`}
               </div>
             )}
@@ -174,13 +174,13 @@ const SessionCreate = () => {
               <span className="error-text">{errors.url.message}</span>
             )}
             <small className="form-hint">
-              This URL will be used by participants to join the session
+              Этот URL будет использоваться участниками для присоединения к сессии викторины
             </small>
           </div>
 
           <div className="form-group">
             <label htmlFor="status" className="form-label">
-              Initial Status <span className="required">*</span>
+              Начальный статус <span className="required">*</span>
             </label>
             <select
               id="status"
@@ -188,14 +188,14 @@ const SessionCreate = () => {
               className={`form-input ${errors.status ? 'form-input-error' : ''}`}
               disabled={loading}
             >
-              <option value="pending">Pending</option>
-              <option value="active">Active</option>
+              <option value="pending">Ожидание</option>
+              <option value="active">Активная</option>
             </select>
             {errors.status && (
               <span className="error-text">{errors.status.message}</span>
             )}
             <small className="form-hint">
-              Sessions typically start as "pending" and become "active" when started
+              Сессия в статусе "Ожидание" не позволит участникам присоединяться до тех пор, пока вы не измените статус на "Активная"
             </small>
           </div>
 
@@ -206,14 +206,14 @@ const SessionCreate = () => {
               onClick={() => navigate(quizIdFromUrl ? `/quizzes/${quizIdFromUrl}` : '/quizzes')}
               disabled={loading}
             >
-              Cancel
+              Отмена
             </button>
             <button
               type="submit"
               className="btn btn-primary"
               disabled={loading}
             >
-              {loading ? 'Creating...' : 'Create Session'}
+              {loading ? 'Создание...' : 'Создать сессию'}
             </button>
           </div>
         </form>

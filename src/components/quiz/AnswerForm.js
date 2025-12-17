@@ -10,14 +10,14 @@ const AnswerForm = ({ answer, index, onChange, onRemove, canRemove }) => {
   return (
     <div className="answer-form-item">
       <div className="answer-form-header">
-        <span className="answer-form-label">Answer {index + 1}</span>
+        <span className="answer-form-label">Ответ {index + 1}</span>
         {canRemove && (
           <button
             type="button"
             className="btn btn-small btn-danger"
             onClick={() => onRemove(index)}
           >
-            Remove
+            Удалить
           </button>
         )}
       </div>
@@ -27,7 +27,7 @@ const AnswerForm = ({ answer, index, onChange, onRemove, canRemove }) => {
           value={answer.text || ''}
           onChange={(e) => handleChange('text', e.target.value)}
           className="form-input"
-          placeholder="Enter answer text"
+          placeholder="Введите текст ответа"
         />
         <label className="form-checkbox-label">
           <input
@@ -36,7 +36,7 @@ const AnswerForm = ({ answer, index, onChange, onRemove, canRemove }) => {
             onChange={(e) => handleChange('is_correct', e.target.checked)}
             className="form-checkbox"
           />
-          <span>Mark as correct answer</span>
+          <span>Отметить как правильный ответ</span>
         </label>
       </div>
     </div>

@@ -33,7 +33,7 @@ const QuestionEdit = () => {
       setQuiz(quizData);
       setQuestion(questionData);
     } catch (err) {
-      setError(err.message || 'Failed to load data');
+      setError(err.message || 'Ошибка при загрузке данных');
     } finally {
       setLoading(false);
     }
@@ -50,7 +50,7 @@ const QuestionEdit = () => {
         ? (Array.isArray(err.response.data.detail) 
             ? err.response.data.detail.map(e => e.msg).join(', ')
             : err.response.data.detail)
-        : err.message || 'Failed to update question';
+        : err.message || 'Ошибка при сохранении вопроса';
       setError(errorMessage);
       setSaving(false);
     }
@@ -63,7 +63,7 @@ const QuestionEdit = () => {
   if (loading) {
     return (
       <div className="quiz-container">
-        <div className="loading">Loading...</div>
+        <div className="loading">Загрузка...</div>
       </div>
     );
   }
@@ -75,7 +75,7 @@ const QuestionEdit = () => {
           {error}
         </div>
         <button className="btn btn-secondary" onClick={handleCancel}>
-          Back to Quiz
+          Вернуться к викторине
         </button>
       </div>
     );
@@ -84,9 +84,9 @@ const QuestionEdit = () => {
   if (!quiz) {
     return (
       <div className="quiz-container">
-        <div className="error-message">Quiz not found</div>
+        <div className="error-message">Викторина не найдена</div>
         <button className="btn btn-secondary" onClick={() => navigate('/quizzes')}>
-          Back to Quizzes
+          Вернуться к викторинам
         </button>
       </div>
     );
@@ -96,9 +96,9 @@ const QuestionEdit = () => {
   if (user && quiz.author_id !== user.id) {
     return (
       <div className="quiz-container">
-        <div className="error-message">You do not have permission to edit questions in this quiz</div>
+        <div className="error-message">Вы не имеете прав на редактирование вопросов в этой викторине</div>
         <button className="btn btn-secondary" onClick={handleCancel}>
-          Back to Quiz
+          Вернуться к викторине
         </button>
       </div>
     );
@@ -107,7 +107,7 @@ const QuestionEdit = () => {
   return (
     <div className="quiz-container">
       <div className="quiz-form-container">
-        <h1>Edit Question</h1>
+        <h1>Редактирование вопроса</h1>
         {error && (
           <div className="error-message" role="alert">
             {error}
@@ -122,7 +122,7 @@ const QuestionEdit = () => {
           />
         ) : (
           <div className="error-message">
-            Question not found. Please note: Question editing requires fetching the question data separately.
+            Вопрос не найден
           </div>
         )}
       </div>

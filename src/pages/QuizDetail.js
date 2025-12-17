@@ -39,7 +39,7 @@ const QuizDetail = () => {
         }
       }
     } catch (err) {
-      setError(err.message || 'Failed to load quiz');
+      setError(err.message || 'Ошибка при загрузке викторины');
     } finally {
       setLoading(false);
     }
@@ -50,7 +50,7 @@ const QuizDetail = () => {
   };
 
   const handleDeleteQuestion = async (questionId) => {
-    if (!window.confirm('Are you sure you want to delete this question? This action cannot be undone.')) {
+    if (!window.confirm('Вы уверены, что хотите удалить этот вопрос? Это действие необратимо.')) {
       return;
     }
 
@@ -58,12 +58,12 @@ const QuizDetail = () => {
       await deleteQuestion(questionId);
       loadQuiz();
     } catch (err) {
-      setError(err.message || 'Failed to delete question');
+      setError(err.message || 'Ошибка при удалении вопроса');
     }
   };
 
   const handleDelete = async () => {
-    if (!window.confirm('Are you sure you want to delete this quiz? This action cannot be undone.')) {
+    if (!window.confirm('Вы уверены, что хотите удалить эту викторину? Это действие необратимо.')) {
       return;
     }
 
@@ -72,7 +72,7 @@ const QuizDetail = () => {
       await deleteQuiz(id);
       navigate('/quizzes', { replace: true });
     } catch (err) {
-      setError(err.message || 'Failed to delete quiz');
+      setError(err.message || 'Ошибка при удалении викторины');
       setDeleting(false);
     }
   };
@@ -96,7 +96,7 @@ const QuizDetail = () => {
   if (loading) {
     return (
       <div className="quiz-container">
-        <div className="loading">Loading quiz...</div>
+        <div className="loading">Загрузка викторины...</div>
       </div>
     );
   }
@@ -108,7 +108,7 @@ const QuizDetail = () => {
           {error}
         </div>
         <Link to="/quizzes" className="btn btn-secondary">
-          Back to Quizzes
+          Вернуться к викторинам
         </Link>
       </div>
     );
@@ -117,9 +117,9 @@ const QuizDetail = () => {
   if (!quiz) {
     return (
       <div className="quiz-container">
-        <div className="error-message">Quiz not found</div>
+        <div className="error-message">Викторина не найдена</div>
         <Link to="/quizzes" className="btn btn-secondary">
-          Back to Quizzes
+          Вернуться к викторинам
         </Link>
       </div>
     );
@@ -130,32 +130,32 @@ const QuizDetail = () => {
       <div className="quiz-detail-header">
         <div>
           <Link to="/quizzes" className="btn btn-link">
-            ← Back to Quizzes
+            ← Вернуться к викторинам
           </Link>
           <h1 className="quiz-detail-title">{quiz.title}</h1>
           <div className="quiz-detail-meta">
             <span className={`badge ${quiz.is_public ? 'badge-public' : 'badge-private'}`}>
-              {quiz.is_public ? 'Public' : 'Private'}
+              {quiz.is_public ? 'Публичная' : 'Приватная'}
             </span>
             <span className="quiz-meta-item">
-              Created: {formatDate(quiz.created_at)}
+              Создана: {formatDate(quiz.created_at)}
             </span>
             {isAuthor && (
-              <span className="quiz-meta-item">Author: You</span>
+              <span className="quiz-meta-item">Автор: Вы</span>
             )}
           </div>
         </div>
         {isAuthor && (
           <div className="quiz-detail-actions">
             <Link to={`/quizzes/${id}/edit`} className="btn btn-secondary">
-              Edit
+              Редактировать викторину
             </Link>
             <button
               className="btn btn-danger"
               onClick={handleDelete}
               disabled={deleting}
             >
-              {deleting ? 'Deleting...' : 'Delete'}
+              {deleting ? 'Удаление...' : 'Удалить'}
             </button>
           </div>
         )}
@@ -169,17 +169,17 @@ const QuizDetail = () => {
 
       {quiz.description && (
         <div className="quiz-detail-description">
-          <h2>Description</h2>
+          <h2>Описание</h2>
           <p>{quiz.description}</p>
         </div>
       )}
 
       <div className="quiz-detail-section">
         <div className="quiz-detail-section-header">
-          <h2>Questions</h2>
+          <h2>Вопросы</h2>
           {isAuthor && (
             <Link to={`/quizzes/${id}/questions/new`} className="btn btn-primary">
-              + Add Question
+              + Добавить вопрос
             </Link>
           )}
         </div>
@@ -193,7 +193,7 @@ const QuizDetail = () => {
 
       <div className="quiz-detail-actions-bottom">
         <Link to={`/sessions/create?quiz=${id}`} className="btn btn-primary">
-          Start Session
+          Начать сессию
         </Link>
       </div>
     </div>

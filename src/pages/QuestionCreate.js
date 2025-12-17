@@ -29,7 +29,7 @@ const QuestionCreate = () => {
       setQuiz(data);
       setQuestionsCount(0);
     } catch (err) {
-      setError(err.message || 'Failed to load quiz');
+      setError(err.message || 'Ошибка при загрузке викторины');
     } finally {
       setLoading(false);
     }
@@ -37,7 +37,7 @@ const QuestionCreate = () => {
 
   const handleSubmit = async (questionData) => {
     if (!user) {
-      setError('You must be logged in to create a question');
+      setError('Вы должны войти в систему, чтобы добавить вопрос');
       return;
     }
 
@@ -51,7 +51,7 @@ const QuestionCreate = () => {
         ? (Array.isArray(err.response.data.detail) 
             ? err.response.data.detail.map(e => e.msg).join(', ')
             : err.response.data.detail)
-        : err.message || 'Failed to create question';
+        : err.message || 'Ошибка при создании вопроса';
       setError(errorMessage);
       setSaving(false);
     }
@@ -64,7 +64,7 @@ const QuestionCreate = () => {
   if (loading) {
     return (
       <div className="quiz-container">
-        <div className="loading">Loading...</div>
+        <div className="loading">Загрузка...</div>
       </div>
     );
   }
@@ -76,7 +76,7 @@ const QuestionCreate = () => {
           {error}
         </div>
         <button className="btn btn-secondary" onClick={handleCancel}>
-          Back to Quiz
+          Вернуться к викторине
         </button>
       </div>
     );
@@ -85,9 +85,9 @@ const QuestionCreate = () => {
   if (!quiz) {
     return (
       <div className="quiz-container">
-        <div className="error-message">Quiz not found</div>
+        <div className="error-message">Викторина не найдена</div>
         <button className="btn btn-secondary" onClick={() => navigate('/quizzes')}>
-          Back to Quizzes
+          Вернуться к викторинам
         </button>
       </div>
     );
@@ -96,9 +96,9 @@ const QuestionCreate = () => {
   if (user && quiz.author_id !== user.id) {
     return (
       <div className="quiz-container">
-        <div className="error-message">You do not have permission to add questions to this quiz</div>
+        <div className="error-message">Вы не имеете прав на добавление вопросов к этой викторине</div>
         <button className="btn btn-secondary" onClick={handleCancel}>
-          Back to Quiz
+          Вернуться к викторине
         </button>
       </div>
     );
@@ -107,7 +107,7 @@ const QuestionCreate = () => {
   return (
     <div className="quiz-container">
       <div className="quiz-form-container">
-        <h1>Add Question to: {quiz.title}</h1>
+        <h1>Добавление: {quiz.title}</h1>
         {error && (
           <div className="error-message" role="alert">
             {error}

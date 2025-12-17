@@ -2,12 +2,12 @@ import './Question.css';
 
 const QuestionItem = ({ question, onEdit, onDelete, isAuthor }) => {
   const formatTimeLimit = (seconds) => {
-    if (!seconds) return 'No time limit';
-    if (seconds < 60) return `${seconds} seconds`;
+    if (!seconds) return 'Неограничено';
+    if (seconds < 60) return `${seconds} секунд`;
     const minutes = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    if (remainingSeconds === 0) return `${minutes} minute${minutes > 1 ? 's' : ''}`;
-    return `${minutes}m ${remainingSeconds}s`;
+    if (remainingSeconds === 0) return `${minutes} минут${minutes > 1 ? 'ы' : ''}`;
+    return `${minutes}м ${remainingSeconds}с`;
   };
 
   return (
@@ -26,13 +26,13 @@ const QuestionItem = ({ question, onEdit, onDelete, isAuthor }) => {
               className="btn btn-small btn-secondary"
               onClick={() => onEdit(question)}
             >
-              Edit
+              Редактировать
             </button>
             <button
               className="btn btn-small btn-danger"
               onClick={() => onDelete(question.id)}
             >
-              Delete
+              Удалить
             </button>
           </div>
         )}
@@ -41,7 +41,7 @@ const QuestionItem = ({ question, onEdit, onDelete, isAuthor }) => {
         <p className="question-text">{question.text || '(No text)'}</p>
         {question.answers && question.answers.length > 0 && (
           <div className="question-answers">
-            <h4>Answers:</h4>
+            <h4>Ответ:</h4>
             <ul className="answer-list">
               {question.answers.map((answer) => (
                 <li
@@ -50,7 +50,7 @@ const QuestionItem = ({ question, onEdit, onDelete, isAuthor }) => {
                 >
                   <span className="answer-text">{answer.text}</span>
                   {answer.is_correct && (
-                    <span className="answer-badge">✓ Correct</span>
+                    <span className="answer-badge">✓ Правильный</span>
                   )}
                 </li>
               ))}

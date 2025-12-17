@@ -46,8 +46,8 @@ const Login = () => {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h1 className="auth-title">Login</h1>
-        <p className="auth-subtitle">Sign in to your account</p>
+        <h1 className="auth-title">Логин</h1>
+        <p className="auth-subtitle">Войдите в свою учетную запись</p>
 
         {successMessage && (
           <div className="success-message" role="alert">
@@ -64,14 +64,14 @@ const Login = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="auth-form">
           <div className="form-group">
             <label htmlFor="username" className="form-label">
-              Username
+              Логин
             </label>
             <input
               id="username"
               type="text"
               {...register('username')}
               className={`form-input ${errors.username ? 'form-input-error' : ''}`}
-              placeholder="Enter your username"
+              placeholder="Введите ваш логин"
               disabled={isLoading}
             />
             {errors.username && (
@@ -81,14 +81,14 @@ const Login = () => {
 
           <div className="form-group">
             <label htmlFor="password" className="form-label">
-              Password
+              Пароль
             </label>
             <input
               id="password"
               type="password"
               {...register('password')}
               className={`form-input ${errors.password ? 'form-input-error' : ''}`}
-              placeholder="Enter your password"
+              placeholder="Введите ваш пароль"
               disabled={isLoading}
             />
             {errors.password && (
@@ -101,15 +101,15 @@ const Login = () => {
             className="auth-button"
             disabled={isLoading}
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? 'Вход...' : 'Войти'}
           </button>
         </form>
 
         <div className="auth-footer">
           <p>
-            Don't have an account?{' '}
+            Нет аккаунта?{' '}
             <Link to="/signup" className="auth-link">
-              Sign up
+              Зарегистрироваться
             </Link>
           </p>
         </div>

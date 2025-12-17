@@ -65,13 +65,13 @@ const QuestionForm = ({ question, onSubmit, onCancel, quizId, existingQuestionsC
     const hasCorrectAnswer = answers.some(a => a.is_correct);
     console.log(hasCorrectAnswer);
     if (!hasCorrectAnswer) {
-      alert('At least one answer must be marked as correct');
+      alert('Должен быть выбран хотя бы один правильный ответ');
       return;
     }
 
     const allAnswersHaveText = answers.every(a => a.text.trim() !== '');
     if (!allAnswersHaveText) {
-      alert('All answers must have text');
+      alert('Все ответы должны иметь текст');
       return;
     }
 
@@ -88,13 +88,13 @@ const QuestionForm = ({ question, onSubmit, onCancel, quizId, existingQuestionsC
     <form onSubmit={handleSubmit(handleFormSubmit)} className="question-form">
       <div className="form-group">
         <label htmlFor="text" className="form-label">
-          Question Text
+          Текст вопроса
         </label>
         <textarea
           id="text"
           {...register('text')}
           className={`form-input form-textarea ${errors.text ? 'form-input-error' : ''}`}
-          placeholder="Enter your question (optional)"
+          placeholder="Введите текст вопроса"
           rows="3"
         />
         {errors.text && (
@@ -104,7 +104,7 @@ const QuestionForm = ({ question, onSubmit, onCancel, quizId, existingQuestionsC
 
       <div className="form-group">
         <label htmlFor="type" className="form-label">
-          Question Type <span className="required">*</span>
+          Тип вопроса <span className="required">*</span>
         </label>
         <select
           id="type"
@@ -112,8 +112,8 @@ const QuestionForm = ({ question, onSubmit, onCancel, quizId, existingQuestionsC
           className={`form-input ${errors.type ? 'form-input-error' : ''}`}
         >
           <option value="multiple_choice">Multiple Choice</option>
-          <option value="true_false">True/False</option>
-          <option value="short_answer">Short Answer</option>
+          {/* <option value="true_false">True/False</option>
+          <option value="short_answer">Short Answer</option> */}
         </select>
         {errors.type && (
           <span className="error-text">{errors.type.message}</span>
@@ -139,7 +139,7 @@ const QuestionForm = ({ question, onSubmit, onCancel, quizId, existingQuestionsC
 
         <div className="form-group">
           <label htmlFor="time_limit" className="form-label">
-            Time Limit (seconds)
+            Ограничение времени (секунды)
           </label>
           <input
             id="time_limit"
@@ -147,7 +147,7 @@ const QuestionForm = ({ question, onSubmit, onCancel, quizId, existingQuestionsC
             {...register('time_limit', { valueAsNumber: true })}
             className={`form-input ${errors.time_limit ? 'form-input-error' : ''}`}
             min="1"
-            placeholder="Optional"
+            placeholder="Необязательно"
           />
           {errors.time_limit && (
             <span className="error-text">{errors.time_limit.message}</span>
@@ -155,7 +155,7 @@ const QuestionForm = ({ question, onSubmit, onCancel, quizId, existingQuestionsC
         </div>
       </div>
 
-      <div className="form-group">
+      {/* <div className="form-group">
         <label htmlFor="media_id" className="form-label">
           Media ID (optional)
         </label>
@@ -169,19 +169,19 @@ const QuestionForm = ({ question, onSubmit, onCancel, quizId, existingQuestionsC
         {errors.media_id && (
           <span className="error-text">{errors.media_id.message}</span>
         )}
-      </div>
+      </div> */}
 
       <div className="form-group">
         <div className="answers-section">
           <div className="answers-section-header">
-            <label className="form-label">Answers <span className="required">*</span></label>
+            <label className="form-label">Ответы <span className="required">*</span></label>
             {questionType !== 'true_false' && (
               <button
                 type="button"
                 className="btn btn-small btn-secondary"
                 onClick={handleAddAnswer}
               >
-                + Add Answer
+                + Добавить ответ
               </button>
             )}
           </div>
@@ -203,10 +203,10 @@ const QuestionForm = ({ question, onSubmit, onCancel, quizId, existingQuestionsC
 
       <div className="form-actions">
         <button type="button" className="btn btn-secondary" onClick={onCancel}>
-          Cancel
+          Отмена
         </button>
         <button type="submit" className="btn btn-primary">
-          {question ? 'Update Question' : 'Create Question'}
+          {question ? 'Обновить вопрос' : 'Создать вопрос'}
         </button>
       </div>
     </form>

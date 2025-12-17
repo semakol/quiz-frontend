@@ -62,14 +62,14 @@ const Session = () => {
       ]);
 
       if (!quizData) {
-        setError('Quiz not found for this session');
+        setError('Викторина не найдена');
         return;
       }
 
       setQuiz(quizData);
       setQuestions(Array.isArray(questionsData) ? questionsData : []);
     } catch (err) {
-      setError(err.message || 'Failed to load session data');
+      setError(err.message || 'Ошибка при загрузке сессии');
     } finally {
       setLoading(false);
     }
@@ -129,7 +129,7 @@ const Session = () => {
   if (loading) {
     return (
       <div className="session-container">
-        <div className="loading">Loading session...</div>
+        <div className="loading">Загрузка сессии...</div>
       </div>
     );
   }
@@ -141,7 +141,7 @@ const Session = () => {
           {error}
         </div>
         <button className="btn btn-secondary" onClick={() => navigate('/quizzes')}>
-          Back to Quizzes
+          Вернуться к викторинам
         </button>
       </div>
     );
@@ -150,9 +150,9 @@ const Session = () => {
   if (!quiz || questions.length === 0) {
     return (
       <div className="session-container">
-        <div className="error-message">No questions available for this session</div>
+        <div className="error-message">Не найдены вопросы для этой сессии</div>
         <button className="btn btn-secondary" onClick={() => navigate('/quizzes')}>
-          Back to Quizzes
+          Вернуться к викторинам
         </button>
       </div>
     );
@@ -166,11 +166,11 @@ const Session = () => {
     return (
       <div className="session-container">
         <div className="session-results">
-          <h1>Quiz Complete!</h1>
+          <h1>Викторина завершена!</h1>
           <div className="results-summary">
             <div className="results-score">
               <span className="results-number">{results.correct}</span>
-              <span className="results-label">out of {results.total} correct</span>
+              <span className="results-label">из {results.total} правильных</span>
             </div>
             <div className="results-percentage">
               {results.percentage}%
@@ -178,7 +178,7 @@ const Session = () => {
           </div>
           <div className="results-actions">
             <button className="btn btn-primary" onClick={() => navigate('/quizzes')}>
-              Back to Quizzes
+              Вернуться к викторинам
             </button>
           </div>
         </div>
@@ -201,7 +201,7 @@ const Session = () => {
           />
         </div>
         <div className="progress-text">
-          Question {currentSortedIndex + 1} of {sortedQuestions.length}
+          Вопрос {currentSortedIndex + 1} из {sortedQuestions.length}
         </div>
       </div>
 
@@ -214,7 +214,7 @@ const Session = () => {
 
       <div className="session-question">
         <div className="question-header">
-          <span className="question-number">Question {currentSortedIndex + 1}</span>
+          <span className="question-number">Вопрос {currentSortedIndex + 1}</span>
           <span className="question-type">{currentQuestion.type}</span>
         </div>
         <h2 className="question-text">{currentQuestion.text || 'Question'}</h2>
@@ -253,15 +253,15 @@ const Session = () => {
           onClick={handlePreviousQuestion}
           disabled={currentSortedIndex === 0}
         >
-          ← Previous
+          ← Прошлый
         </button>
         {currentSortedIndex === sortedQuestions.length - 1 ? (
           <button className="btn btn-primary" onClick={handleSubmit}>
-            Submit Quiz
+            Отправить викторину
           </button>
         ) : (
           <button className="btn btn-primary" onClick={handleNextQuestion}>
-            Next →
+            Следующий →
           </button>
         )}
       </div>

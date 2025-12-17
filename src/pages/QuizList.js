@@ -26,7 +26,7 @@ const QuizList = () => {
       setQuizzes(data);
       setHasMore(data.length === limit);
     } catch (err) {
-      setError(err.message || 'Failed to load quizzes');
+      setError(err.message || 'Ошибка при загрузке викторин');
     } finally {
       setLoading(false);
     }
@@ -56,12 +56,12 @@ const QuizList = () => {
     return (
       <div className="quiz-container">
         <div className="quiz-header">
-          <h1>Quizzes</h1>
+          <h1>Викторины</h1>
           <Link to="/quizzes/new" className="btn btn-primary">
-            Create Quiz
+            Создать викторину
           </Link>
         </div>
-        <div className="loading">Loading quizzes...</div>
+        <div className="loading">Загрузка викторин...</div>
       </div>
     );
   }
@@ -69,9 +69,9 @@ const QuizList = () => {
   return (
     <div className="quiz-container">
       <div className="quiz-header">
-        <h1>Quizzes</h1>
+        <h1>Викторины</h1>
         <Link to="/quizzes/new" className="btn btn-primary">
-          Create Quiz
+          Создать викторину
         </Link>
       </div>
 
@@ -83,9 +83,9 @@ const QuizList = () => {
 
       {quizzes.length === 0 && !loading ? (
         <div className="empty-state">
-          <p>No quizzes found.</p>
+          <p>Викторины не найдены.</p>
           <Link to="/quizzes/new" className="btn btn-primary">
-            Create Your First Quiz
+            Создать первую викторину
           </Link>
         </div>
       ) : (
@@ -96,7 +96,7 @@ const QuizList = () => {
                 <div className="quiz-card-header">
                   <h2 className="quiz-card-title">{quiz.title}</h2>
                   <span className={`badge ${quiz.is_public ? 'badge-public' : 'badge-private'}`}>
-                    {quiz.is_public ? 'Public' : 'Private'}
+                    {quiz.is_public ? 'Публичная' : 'Приватная'}
                   </span>
                 </div>
                 {quiz.description && (
@@ -107,7 +107,7 @@ const QuizList = () => {
                     Created: {formatDate(quiz.created_at)}
                   </span>
                   {quiz.author_id === user?.id && (
-                    <span className="quiz-card-author">Your quiz</span>
+                    <span className="quiz-card-author">Ваша викторина</span>
                   )}
                 </div>
               </div>
@@ -120,17 +120,17 @@ const QuizList = () => {
               onClick={handlePrevious}
               disabled={skip === 0 || loading}
             >
-              Previous
+              Назад
             </button>
             <span className="pagination-info">
-              Showing {skip + 1}-{skip + quizzes.length}
+               {skip + 1}-{skip + quizzes.length}
             </span>
             <button
               className="btn btn-secondary"
               onClick={handleNext}
               disabled={!hasMore || loading}
             >
-              Next
+              Вперёд
             </button>
           </div>
         </>

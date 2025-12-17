@@ -26,7 +26,7 @@ const QuizCreate = () => {
 
   const onSubmit = async (data) => {
     if (!user) {
-      setError('You must be logged in to create a quiz');
+      setError('Вы должны войти в систему, чтобы создать викторину');
       return;
     }
 
@@ -45,7 +45,7 @@ const QuizCreate = () => {
         ? (Array.isArray(err.response.data.detail) 
             ? err.response.data.detail.map(e => e.msg).join(', ')
             : err.response.data.detail)
-        : err.message || 'Failed to create quiz';
+        : err.message || 'Ошибка при создании викторины';
       setError(errorMessage);
     } finally {
       setLoading(false);
@@ -55,7 +55,7 @@ const QuizCreate = () => {
   return (
     <div className="quiz-container">
       <div className="quiz-form-container">
-        <h1>Create New Quiz</h1>
+        <h1>Создание новой викторины</h1>
 
         {error && (
           <div className="error-message" role="alert">
@@ -73,7 +73,7 @@ const QuizCreate = () => {
               type="text"
               {...register('title')}
               className={`form-input ${errors.title ? 'form-input-error' : ''}`}
-              placeholder="Enter quiz title"
+              placeholder="Введите название викторины"
               disabled={loading}
             />
             {errors.title && (
@@ -83,13 +83,13 @@ const QuizCreate = () => {
 
           <div className="form-group">
             <label htmlFor="description" className="form-label">
-              Description
+              Описание
             </label>
             <textarea
               id="description"
               {...register('description')}
               className={`form-input form-textarea ${errors.description ? 'form-input-error' : ''}`}
-              placeholder="Enter quiz description (optional)"
+              placeholder="Введите описание викторины (необязательно)"
               rows="4"
               disabled={loading}
             />
@@ -106,7 +106,7 @@ const QuizCreate = () => {
                 className="form-checkbox"
                 disabled={loading}
               />
-              <span>Make this quiz public</span>
+              <span>Сделать эту викторину публичной</span>
             </label>
           </div>
 
@@ -117,14 +117,14 @@ const QuizCreate = () => {
               onClick={() => navigate('/quizzes')}
               disabled={loading}
             >
-              Cancel
+              Отмена
             </button>
             <button
               type="submit"
               className="btn btn-primary"
               disabled={loading}
             >
-              {loading ? 'Creating...' : 'Create Quiz'}
+              {loading ? 'Создание...' : 'Создать викторину'}
             </button>
           </div>
         </form>

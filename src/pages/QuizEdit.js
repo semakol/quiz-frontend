@@ -36,7 +36,7 @@ const QuizEdit = () => {
       const data = await getQuiz(id);
       
       if (user && data.author_id !== user.id) {
-        setError('You do not have permission to edit this quiz');
+        setError('Вы не авторизованы для редактирования этой викторины');
         return;
       }
 
@@ -47,7 +47,7 @@ const QuizEdit = () => {
         is_public: data.is_public,
       });
     } catch (err) {
-      setError(err.message || 'Failed to load quiz');
+      setError(err.message || 'Ошибка при загрузке викторины');
     } finally {
       setLoading(false);
     }
@@ -68,7 +68,7 @@ const QuizEdit = () => {
         ? (Array.isArray(err.response.data.detail) 
             ? err.response.data.detail.map(e => e.msg).join(', ')
             : err.response.data.detail)
-        : err.message || 'Failed to update quiz';
+        : err.message || 'Ошибка при обновлении викторины';
       setError(errorMessage);
     } finally {
       setSaving(false);
@@ -78,7 +78,7 @@ const QuizEdit = () => {
   if (loading) {
     return (
       <div className="quiz-container">
-        <div className="loading">Loading quiz...</div>
+        <div className="loading">Загрузка викторины...</div>
       </div>
     );
   }
@@ -93,7 +93,7 @@ const QuizEdit = () => {
           className="btn btn-secondary"
           onClick={() => navigate('/quizzes')}
         >
-          Back to Quizzes
+          Вернуться к викторинам
         </button>
       </div>
     );
@@ -102,7 +102,7 @@ const QuizEdit = () => {
   return (
     <div className="quiz-container">
       <div className="quiz-form-container">
-        <h1>Edit Quiz</h1>
+        <h1>Редактирование викторины</h1>
 
         {error && (
           <div className="error-message" role="alert">
@@ -113,7 +113,7 @@ const QuizEdit = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="quiz-form">
           <div className="form-group">
             <label htmlFor="title" className="form-label">
-              Title <span className="required">*</span>
+              Название <span className="required">*</span>
             </label>
             <input
               id="title"
@@ -130,7 +130,7 @@ const QuizEdit = () => {
 
           <div className="form-group">
             <label htmlFor="description" className="form-label">
-              Description
+              Описание
             </label>
             <textarea
               id="description"
@@ -153,7 +153,7 @@ const QuizEdit = () => {
                 className="form-checkbox"
                 disabled={saving}
               />
-              <span>Make this quiz public</span>
+              <span>Сделать эту викторину публичной</span>
             </label>
           </div>
 
@@ -164,7 +164,7 @@ const QuizEdit = () => {
               onClick={() => navigate(`/quizzes/${id}`)}
               disabled={saving}
             >
-              Cancel
+              Отмена
             </button>
             <button
               type="submit"
