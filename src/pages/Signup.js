@@ -22,11 +22,11 @@ const Signup = () => {
     clearError();
   }, [clearError]);
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/', { replace: true });
-    }
-  }, [isAuthenticated, navigate]);
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     navigate('/', { replace: true });
+  //   }
+  // }, [isAuthenticated, navigate]);
 
   const onSubmit = async (data) => {
     clearError();

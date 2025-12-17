@@ -20,7 +20,7 @@ import './App.css';
 
 function App() {
   const { initialize, isAuthenticated } = useAuthStore();
-  WebSocket.
+  // WebSocket.
   // Initialize auth state from storage on app load
   useEffect(() => {
     initialize();
@@ -33,14 +33,12 @@ function App() {
           {/* Public routes */}
           <Route 
             path="/login" 
-            element={
-              isAuthenticated ? <Navigate to="/" replace /> : <Login />
+            element={<Login />
             } 
           />
           <Route 
             path="/signup" 
-            element={
-              isAuthenticated ? <Navigate to="/" replace /> : <Signup />
+            element={<Signup />
             } 
           />
 
